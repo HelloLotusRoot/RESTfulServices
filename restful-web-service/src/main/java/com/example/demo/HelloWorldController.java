@@ -18,22 +18,22 @@ public class HelloWorldController {
 	// GET
 	// /hello-world (endpoint)
 	// @RequestMapping(method = RequestMathod.GET, path = "/hello-world")
-	@GetMapping(path = "/hello-world")
+	@GetMapping(value = "/hello-world")
 	public String helloWorld() {
 		return "Hello World";
 	}
 
-	@GetMapping(path = "/hello-world-bean")
+	@GetMapping(value = "/hello-world-bean")
 	public HelloWorldBean helloWorldBean() {
 		return new HelloWorldBean("Hello World");
 	}
 
-	@GetMapping(path = "/hello-world-bean/{name}")
+	@GetMapping(value = "/hello-world-bean/{name}")
 	public HelloWorldBean helloWorldBean(@PathVariable String name) {
 		return new HelloWorldBean(String.format("Hello World, %s", name));
 	}
 
-	@GetMapping(path = "/hello-world-internationalized")
+	@GetMapping(value = "/hello-world-internationalized")
 	public String helloWorldInternationalized(
 			@RequestHeader(name = "Accept-Language", required = false) Locale locale) {
 		return messageSource.getMessage("greeting.message", null, locale);

@@ -24,13 +24,13 @@ public class UserController {
 		this.service = service;
 	}
 
-	@GetMapping(path = "/users")
+	@GetMapping(value = "/users")
 	public List<User> retrieveAllUsers() {
 		return service.findAll();
 	}
 
 	// GET /users/1 or /users/10 -> String
-	@GetMapping(path = "/users/{id}")
+	@GetMapping(value = "/users/{id}")
 	public User retrieveUser(@PathVariable int id) {
 
 		User user = service.findOne(id);
