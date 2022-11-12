@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -46,9 +47,9 @@ public class AdminUserController {
 		return mapping;
 	}
 
-	// GET /users/1 or /users/10 -> String
-	@GetMapping(path = "/users/{id}")
-	public MappingJacksonValue retrieveUser(@PathVariable int id) {
+	// GET /admin/users/1 -> /admin/v1/user/1
+	@GetMapping(path = "/v1/users/{id}")
+	public MappingJacksonValue retrieveUserV1(@PathVariable int id) {
 
 		User user = service.findOne(id);
 
@@ -66,29 +67,28 @@ public class AdminUserController {
 		return mapping;
 	}
 
-	@PostMapping("/users")
-	public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
-		User savedUser = service.save(user);
+	@GetMapping(path = "/v2/users/{id}")
+	public MappingJacksonValue retrieveUserV2(@PathVariable int id) {
 
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId())
-				.toUri();
-
-		return ResponseEntity.created(location).build();
-	}
-
-	@PutMapping("/users/{id}")
-	public User putUser(@PathVariable int id, @RequestBody User user) {
-		service.updateUser(id, user);
-		return user;
-	}
-
-	@DeleteMapping("/users/{id}")
-	public void deleteUser(@PathVariable int id) {
-		User user = service.deleteById(id);
+		User user = service.findOne(id);
 
 		if (user == null) {
 			throw new UserNotFoundException(String.format("ID[%s] not found", id));
 		}
+
+		// User -> User2
+		UserV2 userV2 = new UserV2();
+		BeanUtils.copyProperties(user, userV2); // id, name, joinDate, password, ssn
+		userV2.setGrade("VIP");
+
+		SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("id", "name", "joinDate", "grade");
+
+		FilterProvider filters = new SimpleFilterProvider().addFilter("UserInfoV2", filter);
+
+		MappingJacksonValue mapping = new MappingJacksonValue(userV2);
+		mapping.setFilters(filters);
+
+		return mapping;
 	}
 
 }

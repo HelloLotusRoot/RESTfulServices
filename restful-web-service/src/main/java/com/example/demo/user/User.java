@@ -11,10 +11,12 @@ import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 //@JsonIgnoreProperties(value= {"password", "ssn"})
+@NoArgsConstructor
 @JsonFilter("UserInfo")
 public class User {
 	private Integer id;
@@ -23,7 +25,7 @@ public class User {
 	private String name;
 	@Past
 	private Date joinDate;
-	
+
 	private String password;
 	private String ssn;
 }
