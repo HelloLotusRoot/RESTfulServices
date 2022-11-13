@@ -11,6 +11,10 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant-path-matcher
+  security:
+    user:
+      name: user
+      password: password
 
 management:
     endpoints:
