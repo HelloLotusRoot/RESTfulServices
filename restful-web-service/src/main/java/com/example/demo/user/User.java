@@ -1,5 +1,9 @@
 package com.example.demo.user;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
@@ -20,7 +24,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 //@JsonFilter("UserInfo")
 @ApiModel(description = "사용자 상세 정보를 위한 도메인 객체")
+@Entity
+@Table(name = "users")
 public class User {
+	@Id
+	@GeneratedValue
 	private Integer id;
 
 	@Size(min = 2, message = "Name은 2글자 이상 입력해 주세요.")
