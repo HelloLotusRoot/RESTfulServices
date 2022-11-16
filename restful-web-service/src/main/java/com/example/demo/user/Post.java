@@ -22,7 +22,7 @@ public class Post {
 	@GeneratedValue
 	private Integer id;
 
-	private String descriprion;
+	private String description;
 
 	// User : Post -> 1 : (0~N), Main : Sub -> Parent : Child
 	@ManyToOne(fetch = FetchType.LAZY)
