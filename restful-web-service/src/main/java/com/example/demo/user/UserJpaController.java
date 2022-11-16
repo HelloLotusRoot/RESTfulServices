@@ -28,7 +28,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 public class UserJpaController {
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	// http://localhost:8088/jpa/users
 	@GetMapping("/users")
 	public List<User> retrieveAllUsers() {
@@ -59,20 +59,33 @@ public class UserJpaController {
 
 		return ResponseEntity.created(location).build();
 	}
-	
-/*	@PutMapping("/users/{id}")
-	public ResponseEntity<User> putUser(@PathVariable int id, @RequestBody User user) {
-		User savedUser = userRepository.save(user);
 
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId())
-				.toUri();
-
-		return ResponseEntity.created(location).build();
-		
-	}*/
+	/*
+	 * @PutMapping("/users/{id}") public ResponseEntity<User> putUser(@PathVariable
+	 * int id, @RequestBody User user) { User savedUser = userRepository.save(user);
+	 * 
+	 * URI location =
+	 * ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand
+	 * (savedUser.getId()) .toUri();
+	 * 
+	 * return ResponseEntity.created(location).build();
+	 * 
+	 * }
+	 */
 
 	@DeleteMapping("/users/{id}")
 	public void deleteUser(@PathVariable int id) {
 		userRepository.deleteById(id);
+	}
+
+	// /jpa/users/90001/posts
+	@GetMapping("/users/{id}/posts")
+	public List<Post> retrieveAllPostsByUser(@PathVariable int id) {
+		Optional<User> user = userRepository.findById(id);
+
+		if (!user.isPresent()) {
+			throw new UserNotFoundException(String.format("ID[%s] not found", id));
+		}
+		return user.get().getPosts();
 	}
 }
