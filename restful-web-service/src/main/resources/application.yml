@@ -11,6 +11,9 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant-path-matcher
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp    
 #  security:
 #    user:
 #      name: user
