@@ -31,7 +31,7 @@ import lombok.NoArgsConstructor;
 public class User {
 	@Id
 	@GeneratedValue
-	private Integer id;
+	private Integer userId;
 
 	@Size(min = 2, message = "Name은 2글자 이상 입력해 주세요.")
 	@ApiModelProperty(notes = "사용자 이름을 입력해 주세요")
@@ -48,8 +48,8 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<Post> posts;
 	
-	public User(int id, String name, Date joinDate, String password, String ssn) {
-		this.id = id;
+	public User(int userId, String name, Date joinDate, String password, String ssn) {
+		this.userId = userId;
 		this.name = name;
 		this.joinDate = joinDate;
 		this.password = password;

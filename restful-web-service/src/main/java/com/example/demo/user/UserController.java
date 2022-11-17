@@ -35,13 +35,13 @@ public class UserController {
 	}
 
 	// GET /users/1 or /users/10 -> String
-	@GetMapping(value = "/users/{id}")
-	public EntityModel<User> retrieveUser(@PathVariable int id) {
+	@GetMapping(value = "/users/{userId}")
+	public EntityModel<User> retrieveUser(@PathVariable int userId) {
 
-		User user = service.findOne(id);
+		User user = service.findOne(userId);
 
 		if (user == null) {
-			throw new UserNotFoundException(String.format("ID[%s] not found", id));
+			throw new UserNotFoundException(String.format("ID[%s] not found", userId));
 		}
 
 		// HATEOAS
@@ -58,24 +58,24 @@ public class UserController {
 	public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
 		User savedUser = service.save(user);
 
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId())
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getUserId())
 				.toUri();
 
 		return ResponseEntity.created(location).build();
 	}
 
-	@PutMapping("/users/{id}")
-	public User putUser(@PathVariable int id, @RequestBody User user) {
-		service.updateUser(id, user);
+	@PutMapping("/users/{userId}")
+	public User putUser(@PathVariable int userId, @RequestBody User user) {
+		service.updateUser(userId, user);
 		return user;
 	}
 
-	@DeleteMapping("/users/{id}")
-	public void deleteUser(@PathVariable int id) {
-		User user = service.deleteById(id);
+	@DeleteMapping("/users/{userId}")
+	public void deleteUser(@PathVariable int userId) {
+		User user = service.deleteById(userId);
 
 		if (user == null) {
-			throw new UserNotFoundException(String.format("ID[%s] not found", id));
+			throw new UserNotFoundException(String.format("ID[%s] not found", userId));
 		}
 	}
 

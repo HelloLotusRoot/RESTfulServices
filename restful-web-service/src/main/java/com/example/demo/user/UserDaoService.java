@@ -24,26 +24,26 @@ public class UserDaoService {
 	}
 
 	public User save(User user) {
-		if (user.getId() == null) {
-			user.setId(++usersCount);
+		if (user.getUserId() == null) {
+			user.setUserId(++usersCount);
 		}
 
 		users.add(user);
 		return user;
 	}
 
-	public User findOne(int id) {
+	public User findOne(int userId) {
 		for (User user : users) {
-			if (user.getId() == id)
+			if (user.getUserId() == userId)
 				return user;
 		}
 
 		return null;
 	}
 
-	public User updateUser(Integer id, User user) {
+	public User updateUser(Integer userId, User user) {
 		users.stream().forEach(c -> {
-			if (c.getId() == id) {
+			if (c.getUserId() == userId) {
 				c.setName(user.getName());
 				c.setJoinDate(user.getJoinDate());
 			}
@@ -51,13 +51,13 @@ public class UserDaoService {
 		return user;
 	}
 
-	public User deleteById(int id) {
+	public User deleteById(int userId) {
 		Iterator<User> iterator = users.iterator();
 
 		while (iterator.hasNext()) {
 			User user = iterator.next();
 
-			if (user.getId() == id) {
+			if (user.getUserId() == userId) {
 				iterator.remove();
 				return user;
 			}
