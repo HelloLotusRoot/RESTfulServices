@@ -5,10 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/web")
 public class webController {
 
-	@GetMapping
+	@GetMapping(value = "/index")
 	public String index() {
 		return "index";
 	}
@@ -18,8 +17,8 @@ public class webController {
 		return "post";
 	}
 
-	@GetMapping(value = "/user")
-	public String user() {
-		return "user";
+	@GetMapping(value = "/login")
+	public String login() {
+		return "login";
 	}
 }
