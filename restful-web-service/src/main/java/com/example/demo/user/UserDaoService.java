@@ -65,10 +65,10 @@ public class UserDaoService {
 		return null;
 	}
 	
-	public int login(int userId, String password) {
+	public int login(String name, String password) {
 		try {
 			for (User user : users) {
-				if (user.getUserId() == userId)
+				if (user.getName() == name)
 					if (user.getPassword() == password)
 						return 1; //로그인 성공
 					else

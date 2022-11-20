@@ -42,7 +42,7 @@ public class User {
 
 	@ApiModelProperty(notes = "사용자 패스워드를 입력해 주세요")
 	private String password;
-	@ApiModelProperty(notes = "사용자 주민번호를 입력해 주세요")
+	@ApiModelProperty(notes = "사용자 학번를 입력해 주세요")
 	private String ssn;
 	
 	@OneToMany(mappedBy = "user")

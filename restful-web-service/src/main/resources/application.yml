@@ -13,7 +13,8 @@ spring:
       matching-strategy: ant-path-matcher
     view:
       prefix: /WEB-INF/jsp/
-      suffix: .jsp    
+      suffix: .jsp  
+    static-path-pattern: /resources/**  
 #  security:
 #    user:
 #      name: user

@@ -6,7 +6,7 @@
 request.setCharacterEncoding("UTF-8");
 %>
 <jsp:useBean id="user" class="com.example.demo.user.User" scope="page" />
-<jsp:setProperty name="user" property="userId" />
+<jsp:setProperty name="user" property="name" />
 <jsp:setProperty name="user" property="password" />
 <!DOCTYPE html>
 <html>
@@ -21,7 +21,7 @@ request.setCharacterEncoding("UTF-8");
 	if (result == 1) {
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("location.href = 'main.jsp'");
+		script.println("location.href = '/main'");
 		script.println("</script>");
 	} else if (result == 0) {
 		PrintWriter script = response.getWriter();
