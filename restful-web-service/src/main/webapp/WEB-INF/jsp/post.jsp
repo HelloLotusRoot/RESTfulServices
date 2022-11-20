@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8" isELIgnored="false"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ page import="com.example.demo.user.Post"%>
 <%@ page import="com.example.demo.user.PostDaoService"%>
@@ -9,8 +8,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<meta name="viewport" content="width=device-width" initial-scale="1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
 <title>Message Board</title>
 </head>
 <%
@@ -29,9 +33,9 @@ Post posts = new Post();
 			<a class="navbar-brand" href="index.jsp">JSP 게시판 웹 사이트</a>
 		</div>
 		<div class="collapse navbar-collapse"
-			id="bs-example-navbar-collapse-1">
+			id="bs-example-navbar-collapse-1" aria-expanded="false">
 			<ul class="nav navbar-nav">
-				<li><a href="index.jsp">메인</a></li>
+				<li><a href="main.jsp">메인</a></li>
 				<li><a href="post.jsp">게시판</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -45,7 +49,7 @@ Post posts = new Post();
 			</ul>
 		</div>
 	</nav>
-	<script src="https://code.jquery.com/jquery-3.3.7.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script type="application/js" src="/js/bootstrap.min.js"></script>
 </body>
 </html>

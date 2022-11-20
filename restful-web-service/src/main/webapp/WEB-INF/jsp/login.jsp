@@ -1,26 +1,75 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+	pageEncoding="utf-8" isELIgnored="false"%>
+
+<%@ page import="com.example.demo.user.Post"%>
+<%@ page import="com.example.demo.user.PostDaoService"%>
+<%@ page import="java.util.List"%>
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width" initial-scale="1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+<title>Message Board</title>
 </head>
+<%
+Post posts = new Post();
+//List<Post> list = posts.findAll();
+%>
 <body>
-<div class="container">
-    <h1>로그인</h1>
-    <form th:action="@{/login_proc}" method="post">
-        <div class="form-group">
-            <label th:for="username">아이디</label>
-            <input type="text" name="username" class="form-control" placeholder="아이디 입력해주세요">
-        </div>
-        <div class="form-group">
-            <label th:for="password">비밀번호</label>
-            <input type="password" class="form-control" name="password" placeholder="비밀번호 입력해주세요">
-        </div>
-        <button type="submit" class="btn btn-primary">로그인</button>
-        <button type="button" class="btn btn-primary" onClick="location.href='signUp'">회원 가입</button>
-    </form>
-    <br/>
-</div>
+	<nav class="navbar navbar-default">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+				aria-expanded="false">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.jsp">JSP 게시판 웹 사이트</a>
+		</div>
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1" aria-expanded="false">
+			<ul class="nav navbar-nav">
+				<li><a href="main.jsp">메인</a></li>
+				<li><a href="post.jsp">게시판</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-haspopup="true"
+					aria-expanded="false">접속하기<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li class="active"><a href="login.jsp">로그인</a></li>
+						<li><a href="join.jsp">회원가입</a></li>
+					</ul></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="col-lg-4"></div>
+		<div class="col-lg-4">
+			<div class="jumbotron" style="padding-top: 20px;">
+				<form method="post" action="loginAction.jsp">
+					<h3 style="text-align: center;">로그인 화면</h3>
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="아이디"
+							name="userID" maxlength="20">
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="비밀번호"
+							name="userPassword" maxlength="20">
+					</div>
+					<input type="submit" class="btn btn-primary form-control"
+						value="로그인">
+				</form>
+			</div>
+			<div class="col-lg-4"></div>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script type="application/js" src="/js/bootstrap.min.js"></script>
 </body>
 </html>
