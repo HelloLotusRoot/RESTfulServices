@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8" isELIgnored="false"%>
 
-<%@ page import="com.example.demo.user.Post"%>
-<%@ page import="com.example.demo.user.PostDaoService"%>
+<%@ page import="com.example.demo.user.Board"%>
+<%@ page import="com.example.demo.user.BoardtDaoService"%>
 <%@ page import="java.util.List"%>
+<%@ page import="java.io.PrintWriter"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,13 +16,19 @@
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 
-<title>Message Board</title>
+<title>RESTful Service</title>
 </head>
 <%
-Post posts = new Post();
+Board posts = new Board();
 //List<Post> list = posts.findAll();
 %>
 <body>
+	<%
+	String userID = null;
+	if (session.getAttribute("userID") != null) {
+		userID = (String) session.getAttribute("userID");
+	}
+	%>
 	<nav class="navbar navbar-default">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -36,8 +43,11 @@ Post posts = new Post();
 			id="bs-example-navbar-collapse-1" aria-expanded="false">
 			<ul class="nav navbar-nav">
 				<li><a href="main.jsp">메인</a></li>
-				<li><a href="post.jsp">게시판</a></li>
+				<li class="active"><a href="board.jsp">게시판</a></li>
 			</ul>
+			<%
+			if (userID == null) {
+			%>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -47,6 +57,21 @@ Post posts = new Post();
 						<li><a href="join.jsp">회원가입</a></li>
 					</ul></li>
 			</ul>
+			<%
+			} else {
+			%>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-haspopup="true"
+					aria-expanded="false">회원관리<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="logoutAction.jsp">로그아웃</a></li>
+					</ul></li>
+			</ul>
+			<%
+			}
+			%>
+
 		</div>
 	</nav>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>

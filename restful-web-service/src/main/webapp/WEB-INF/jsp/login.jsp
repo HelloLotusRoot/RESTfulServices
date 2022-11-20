@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8" isELIgnored="false"%>
 
-<%@ page import="com.example.demo.user.Post"%>
-<%@ page import="com.example.demo.user.PostDaoService"%>
+<%@ page import="com.example.demo.user.Board"%>
+<%@ page import="com.example.demo.user.BoardtDaoService"%>
 <%@ page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
@@ -14,10 +14,10 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-<title>Message Board</title>
+<title>RESTful Service</title>
 </head>
 <%
-Post posts = new Post();
+Board boards = new Board();
 //List<Post> list = posts.findAll();
 %>
 <body>
@@ -35,7 +35,7 @@ Post posts = new Post();
 			id="bs-example-navbar-collapse-1" aria-expanded="false">
 			<ul class="nav navbar-nav">
 				<li><a href="main.jsp">메인</a></li>
-				<li><a href="post.jsp">게시판</a></li>
+				<li><a href="board.jsp">게시판</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"

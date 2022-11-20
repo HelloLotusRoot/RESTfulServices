@@ -23,45 +23,45 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
-@RequestMapping("/posts")
-public class PostController {
+@RequestMapping("/boards")
+public class BoardController {
 
 	@Autowired
-	private PostRepository postRepository;
+	private BoardRepository boardRepository;
 
 	// http://localhost:8088/posts
 	@GetMapping
-	public List<Post> retrieveAllPosts() {
-		return postRepository.findAll();
+	public List<Board> retrieveAllBoards() {
+		return boardRepository.findAll();
 	}
 
-	@GetMapping("/{postId}")
-	public EntityModel<Post> retrieveAllPosts(@PathVariable int postId) {
-		Optional<Post> post = postRepository.findById(postId);
+	@GetMapping("/{boardId}")
+	public EntityModel<Board> retrieveAllBoards(@PathVariable int boardId) {
+		Optional<Board> board = boardRepository.findById(boardId);
 
-		if (!post.isPresent()) {
-			throw new PostNotFoundException(String.format("PostId[%s] not found", postId));
+		if (!board.isPresent()) {
+			throw new BoardNotFoundException(String.format("BoardId[%s] not found", boardId));
 		}
 
-		EntityModel<Post> postModel = EntityModel.of(post.get());
-		WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retrieveAllPosts());
-		postModel.add(linkTo.withRel("all-posts"));
+		EntityModel<Board> boardModel = EntityModel.of(board.get());
+		WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retrieveAllBoards());
+		boardModel.add(linkTo.withRel("all-boards"));
 
-		return postModel;
+		return boardModel;
 	}
 
 	@PostMapping
-	public ResponseEntity<Post> createPost(@Valid @RequestBody Post post) {
-		Post savedPost = postRepository.save(post);
+	public ResponseEntity<Board> createBoard(@Valid @RequestBody Board board) {
+		Board savedBoard = boardRepository.save(board);
 
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{PostId}")
-				.buildAndExpand(savedPost.getPostId()).toUri();
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{BoardId}")
+				.buildAndExpand(savedBoard.getBoardId()).toUri();
 
 		return ResponseEntity.created(location).build();
 	}
 
-	@DeleteMapping("/{postId}")
-	public void deleteUser(@PathVariable int postId) {
-		postRepository.deleteById(postId);
+	@DeleteMapping("/{boardId}")
+	public void deleteBoard(@PathVariable int boardId) {
+		boardRepository.deleteById(boardId);
 	}
 }

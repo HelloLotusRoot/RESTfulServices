@@ -30,7 +30,7 @@ public class UserJpaController {
 	private UserRepository userRepository;
 
 	@Autowired
-	private PostRepository postRepository;
+	private BoardRepository postRepository;
 
 	// http://localhost:8088/jpa/users
 	@GetMapping("/users")
@@ -82,28 +82,28 @@ public class UserJpaController {
 	}
 
 	// /jpa/users/90001/posts
-	@GetMapping("/users/{userId}/posts")
-	public List<Post> retrieveAllPostsByUser(@PathVariable int userId) {
+	@GetMapping("/users/{userId}/boards")
+	public List<Board> retrieveAllBoardsByUser(@PathVariable int userId) {
 		Optional<User> user = userRepository.findById(userId);
 
 		if (!user.isPresent()) {
 			throw new UserNotFoundException(String.format("ID[%s] not found", userId));
 		}
-		return user.get().getPosts();
+		return user.get().getBoards();
 	}
 
-	@PostMapping("/users/{userId}/posts")
-	public ResponseEntity<Post> createPost(@PathVariable int userId, @RequestBody Post post) {
+	@PostMapping("/users/{userId}/boards")
+	public ResponseEntity<Board> createBoard(@PathVariable int userId, @RequestBody Board board) {
 		Optional<User> user = userRepository.findById(userId);
 
 		if (!user.isPresent()) {
 			throw new UserNotFoundException(String.format("ID[%s] not found", userId));
 		}
 
-		post.setUser(user.get());
-		Post savedPost = postRepository.save(post);
+		board.setUser(user.get());
+		Board savedPost = postRepository.save(board);
 
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedPost.getPostId())
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedPost.getBoardId())
 				.toUri();
 
 		return ResponseEntity.created(location).build();

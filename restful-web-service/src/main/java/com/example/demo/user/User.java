@@ -46,7 +46,7 @@ public class User {
 	private String ssn;
 	
 	@OneToMany(mappedBy = "user")
-	private List<Post> posts;
+	private List<Board> boards;
 	
 	public User(int userId, String name, Date joinDate, String password, String ssn) {
 		this.userId = userId;

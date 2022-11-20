@@ -64,4 +64,20 @@ public class UserDaoService {
 		}
 		return null;
 	}
+	
+	public int login(int userId, String password) {
+		try {
+			for (User user : users) {
+				if (user.getUserId() == userId)
+					if (user.getPassword() == password)
+						return 1; //로그인 성공
+					else
+						return 0; //비밀번호 불일치
+				return -1; // 아이디가 없음
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -2; //데이터베이스 오류
+	}
 }

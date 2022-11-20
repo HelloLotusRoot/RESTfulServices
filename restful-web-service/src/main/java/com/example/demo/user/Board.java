@@ -22,31 +22,31 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(description = "게시판 도메인 객체")
-@Table(name = "posts")
-public class Post {
+@Table(name = "boards")
+public class Board {
 
 	@Id
 	@GeneratedValue
-	private Integer postId;
+	private Integer boardId;
 
-	// User : Post -> 1 : (0~N), Main : Sub -> Parent : Child
+	// User : Board -> 1 : (0~N), Main : Sub -> Parent : Child
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private User user;
 
-	private String postTitle;
+	private String boardTitle;
 
-	private String postContent;
+	private String boardContent;
 
 	@Past
-	private Date postDate;
+	private Date boardDate;
 
-	public Post(int postId, User user, String postTitle, String postContent, Date postDate) {
-		this.postId = postId;
+	public Board(int boardId, User user, String boardTitle, String boardContent, Date boardDate) {
+		this.boardId = boardId;
 		this.user = user;
-		this.postTitle = postTitle;
-		this.postContent = postContent;
-		this.postDate = postDate;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.boardDate = boardDate;
 	}
 
 }
