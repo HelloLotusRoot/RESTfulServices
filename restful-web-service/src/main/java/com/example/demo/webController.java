@@ -9,7 +9,7 @@ public class webController {
 
 	@GetMapping(value = "/home")
 	public String index() {
-		return "index";
+		return "thymeleaf/index";
 	}
 	
 	@GetMapping(value = "/board")

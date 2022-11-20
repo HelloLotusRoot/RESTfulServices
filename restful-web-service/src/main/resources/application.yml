@@ -15,6 +15,12 @@ spring:
       prefix: /WEB-INF/jsp/
       suffix: .jsp  
     static-path-pattern: /resources/**  
+  thymeleaf:
+    view-names: thymeleaf/*
+    prefix: classpath:/templates/
+    suffix: .html 
+    cache: false 
+    check-template-location: true
 #  security:
 #    user:
 #      name: user
