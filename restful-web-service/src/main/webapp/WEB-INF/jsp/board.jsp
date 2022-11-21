@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width" initial-scale="1">
+<meta name="viewport" content="width=device-width initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.css">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -57,7 +57,7 @@ request.setAttribute("totalList", boardList.size());
 				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/main">JSP 게시판 웹 사이트</a>
+			<a class="navbar-brand" href="/main">20191734</a>
 		</div>
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1" aria-expanded="false">
@@ -111,7 +111,7 @@ request.setAttribute("totalList", boardList.size());
 			<tr>
 				<td align="center"><%=boards.getBoardId()%></td>
 				<td align="left"><a
-					href="/getBoard?boardId=<%=boards.getBoardId()%>"><%=boards.getBoardTitle()%></a></td>
+					href="/post/{boardId}<%=boards.getBoardId()%>"><%=boards.getBoardTitle()%></a></td>
 				<!-- 제목으로 갈 때 게시글 번호를 같이 넘겨줘라. -->
 				<td align="center"><%=boards.getWriter()%></td>
 				<td align="center"><%=boards.getBoardDate()%></td>
@@ -120,7 +120,7 @@ request.setAttribute("totalList", boardList.size());
 			}
 			%>
 		</table>
-		<a href="/insertPost" class="btn btn-primary pull-rigth">새 게시글 등록</a>&nbsp;&nbsp;&nbsp;
+		<a href="/insertPost" class="btn btn-primary pull-rigth">새 게시글 등록</a>
 		<a href="/board" class="btn btn-primary pull-rigth">전체 게시물 목록 보기</a>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>

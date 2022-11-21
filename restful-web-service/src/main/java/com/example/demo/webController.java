@@ -63,8 +63,8 @@ public class webController {
 		return "main";
 	}
 	
-	@GetMapping(value = "/post")
-	public String post() {
+	@GetMapping(value = "/post/{boardId}")
+	public String post(@PathVariable int boardId) {
 		return "post";
 	}
 	

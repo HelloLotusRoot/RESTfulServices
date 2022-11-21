@@ -105,12 +105,6 @@ public class BoardDaoService {
 		try {
 			conn = JDBCUtil.getConnection();
 
-			// [중요] 해당 게시글의 조회수(cnt)를 1 증가 시킨다.
-			String UPDATE_CNT = "update boards set cnt=cnt+1 where BOARD_Id=?";
-			pstmt = conn.prepareStatement(UPDATE_CNT);
-			pstmt.setInt(1, boardDO.getBoardId());
-			pstmt.executeUpdate(); // DML 작업 시에는 executeUpdate로 호출
-
 			// 그런 다음 해당 게시글 가져오기
 			String BOARD_GET = "select * from boards where BOARD_Id=?";
 			pstmt = conn.prepareStatement(BOARD_GET);
@@ -135,7 +129,7 @@ public class BoardDaoService {
 		}
 
 		return board;
-	} 
+	}
 
 	// 게시글 수정 처리 메소드
 	public int updateBoard(Board boardDO) {

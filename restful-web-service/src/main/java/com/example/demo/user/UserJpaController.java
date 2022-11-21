@@ -103,8 +103,8 @@ public class UserJpaController {
 		board.setUser(user.get());
 		Board savedPost = postRepository.save(board);
 
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedPost.getBoardId())
-				.toUri();
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(savedPost.getBoardId()).toUri();
 
 		return ResponseEntity.created(location).build();
 	}

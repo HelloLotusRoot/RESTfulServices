@@ -29,7 +29,7 @@ Board boards = new Board();
 				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index.jsp">JSP 게시판 웹 사이트</a>
+			<a class="navbar-brand" href="index.jsp">20191734</a>
 		</div>
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1" aria-expanded="false">
