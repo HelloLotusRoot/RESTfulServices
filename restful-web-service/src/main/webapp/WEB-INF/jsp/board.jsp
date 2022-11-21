@@ -2,7 +2,7 @@
 	pageEncoding="utf-8" isELIgnored="false"%>
 
 <%@ page import="com.example.demo.user.Board"%>
-<%@ page import="com.example.demo.user.BoardtDaoService"%>
+<%@ page import="com.example.demo.user.BoardDaoService"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.io.PrintWriter"%>
 <!DOCTYPE html>
@@ -17,16 +17,36 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 
 <title>RESTful Service</title>
+<style>
+#div_box {
+	position: absolutel;
+	top: 10%;
+	left: 20%;
+}
+</style>
 </head>
 <%
-Board boards = new Board();
-//List<Board> list = boards.findAll();
+request.setCharacterEncoding("UTF-8");
+String searchField = ""; //검색 대상(즉, 제목 or 작성자)
+String searchText = ""; //검색 내용
+if (request.getParameter("searchCondition") != "" && request.getParameter("searchKeyword") != "") {
+	searchField = request.getParameter("searchCondition");
+	searchText = request.getParameter("searchKeyword");
+}
+
+BoardDaoService boardDAO = new BoardDaoService();
+List<Board> boardList = boardDAO.getBoardList(searchField, searchText);
+
+request.setAttribute("boardList", boardList);
+// session과 request 차이점 : request는 현재 페이지 / session은 여러 페이지에서 공유할 때 쓴다.
+
+request.setAttribute("totalList", boardList.size());
 %>
 <body>
 	<%
-	String userID = null;
-	if (session.getAttribute("userID") != null) {
-		userID = (String) session.getAttribute("userID");
+	String name = null;
+	if (session.getAttribute("name") != null) {
+		name = (String) session.getAttribute("name");
 	}
 	%>
 	<nav class="navbar navbar-default">
@@ -46,7 +66,7 @@ Board boards = new Board();
 				<li class="active"><a href="/board">게시판</a></li>
 			</ul>
 			<%
-			if (userID == null) {
+			if (name == null) {
 			%>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -74,6 +94,35 @@ Board boards = new Board();
 
 		</div>
 	</nav>
+	<div class="container">
+		<table class="table table-striped" style="text =align: center;">
+			<tr>
+				<th style="background-color: #eeeeee; text-align: center;">게시물
+					번호</th>
+				<th style="background-color: #eeeeee; text-align: center;">제목</th>
+				<th style="background-color: #eeeeee; text-align: center;">작성자</th>
+				<th style="background-color: #eeeeee; text-align: center;">작성일</th>
+			</tr>
+
+
+			<%
+			for (Board boards : boardList) {
+			%>
+			<tr>
+				<td align="center"><%=boards.getBoardId()%></td>
+				<td align="left"><a
+					href="/getBoard?boardId=<%=boards.getBoardId()%>"><%=boards.getBoardTitle()%></a></td>
+				<!-- 제목으로 갈 때 게시글 번호를 같이 넘겨줘라. -->
+				<td align="center"><%=boards.getWriter()%></td>
+				<td align="center"><%=boards.getBoardDate()%></td>
+			</tr>
+			<%
+			}
+			%>
+		</table>
+		<a href="/insertPost" class="btn btn-primary pull-rigth">새 게시글 등록</a>&nbsp;&nbsp;&nbsp;
+		<a href="/board" class="btn btn-primary pull-rigth">전체 게시물 목록 보기</a>
+	</div>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script type="application/js" src="/js/bootstrap.min.js"></script>
 </body>

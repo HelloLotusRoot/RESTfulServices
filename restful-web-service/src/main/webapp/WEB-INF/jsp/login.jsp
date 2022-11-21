@@ -2,7 +2,7 @@
 	pageEncoding="utf-8" isELIgnored="false"%>
 
 <%@ page import="com.example.demo.user.Board"%>
-<%@ page import="com.example.demo.user.BoardtDaoService"%>
+<%@ page import="com.example.demo.user.BoardDaoService"%>
 <%@ page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
@@ -55,12 +55,12 @@ Board boards = new Board();
 				<form method="post" action="/loginAction">
 					<h3 style="text-align: center;">로그인 화면</h3>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="아이디"
-							name="name" maxlength="20">
+						<input type="text" class="form-control" name="name"
+							placeholder="아이디" maxlength="20">
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="비밀번호"
-							name="password" maxlength="20">
+						<input type="text" class="form-control" name="password"
+							placeholder="비밀번호" maxlength="20">
 					</div>
 					<input type="submit" class="btn btn-primary form-control"
 						value="로그인">
@@ -69,6 +69,7 @@ Board boards = new Board();
 			<div class="col-lg-4"></div>
 		</div>
 	</div>
+	
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script type="application/js" src="/js/bootstrap.min.js"></script>
 </body>

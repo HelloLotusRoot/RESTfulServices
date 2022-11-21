@@ -2,7 +2,7 @@
 	pageEncoding="utf-8" isELIgnored="false"%>
 
 <%@ page import="com.example.demo.user.Board"%>
-<%@ page import="com.example.demo.user.BoardtDaoService"%>
+<%@ page import="com.example.demo.user.BoardDaoService"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.io.PrintWriter"%>
 <!DOCTYPE html>

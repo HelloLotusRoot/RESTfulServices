@@ -33,6 +33,8 @@ public class Board {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private User user;
+	
+	private String writer;
 
 	private String boardTitle;
 
@@ -41,9 +43,10 @@ public class Board {
 	@Past
 	private Date boardDate;
 
-	public Board(int boardId, User user, String boardTitle, String boardContent, Date boardDate) {
+	public Board(int boardId, User user, String writer, String boardTitle, String boardContent, Date boardDate) {
 		this.boardId = boardId;
 		this.user = user;
+		this.writer = writer;
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
 		this.boardDate = boardDate;

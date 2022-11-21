@@ -1,63 +1,83 @@
-<%@page contentType="text/html; charset=UTF-8" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@page contentType="text/html; charset=UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<%@ page import="com.example.demo.user.Board"%>
+<%@ page import="com.example.demo.user.BoardDaoService"%>
+<%@ page import="java.util.List"%>
+<!DOCTYPE html>
+<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>글상세</title>
-    <style>
-        table {
-            width: 100%;
-            border: 1px solid #444444;
-            border-collapse: collapse;
-        }
-        table th {
-            border: 1px solid #444444;
-            text-align: center;
-            height: 40px;
-            background-color: dodgerblue;
-            color: cornsilk;
-        }
-        table td {
-            border: 1px solid #444444;
-            text-align: left;
-        }
-    </style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width" initial-scale="1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+<title>글상세</title>
 </head>
 <body>
-<div style="text-align: center;">
-    <h3>글쓰기</h3>
-    <hr>
-    <form action="updateBoard" method="post">
-        <input type="hidden" name="seq" value="${post.postId}"/>
-        <table style="width: 700px; margin: auto">
-            <tr>
-                <td width="70" style="background-color: dodgerblue; color: cornsilk">제목</td>
-                <td><input type="text" name="title" value="${post.postTitle}"/></td>
-            </tr>
-            <tr>
-                <td style="background-color: dodgerblue; color: cornsilk">작성자</td>
-                <td>${post.user}</td>
-            </tr>
-            <tr>
-                <td style="background-color: dodgerblue; color: cornsilk">내용</td>
-                <td><textarea name="content" cols="40" rows="10">${post.postContent}</textarea></td>
-            </tr>
-            <tr>
-                <td style="background-color: dodgerblue; color: cornsilk">등록일</td>
-                <td><fmt:formatDate value="${post.postDate}" pattern="yyyy-MM-dd"></fmt:formatDate> </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <div style="text-align: center;">
-                        <input type="submit" value="수정"/>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </form>
-    <hr>
-    <a href="insertPost">글등록</a>
-    <a href="deletePost=${post.postId}">글삭제</a>
-    <a href="board">글목록</a>
-</div>
+	<nav class="navbar navbar-default">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+				aria-expanded="false">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.jsp">JSP 게시판 웹 사이트</a>
+		</div>
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1" aria-expanded="false">
+			<ul class="nav navbar-nav">
+				<li><a href="/main">메인</a></li>
+				<li class="active"><a href="/board">게시판</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-haspopup="true"
+					aria-expanded="false">접속하기<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="/login">로그인</a></li>
+						<li class="active"><a href="/join">회원가입</a></li>
+					</ul></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="row">
+			<hr>
+			<form method="POST" action="/insertPostAction">
+				<table class="table table-striped"
+					style="text-align: center; border: 1px solid #dddddd">
+					<thead>
+						<tr>
+							<th colspan="2"
+								style="background-color: #eeeeee; text-align: center;">게시판
+								글쓰기</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input type="text" class="form-control"
+								placeholder="글 제목" name="boardTitle" maxlength="50"></td>
+						</tr>
+						<tr>
+							<td><input type="text" class="form-control"
+								placeholder="글쓴이" name="writer" maxlength="20"></td>
+						</tr>
+						<tr>
+							<td><textarea class="form-control" placeholder="글 내용"
+									name="boardContent" maxlength="750"></textarea></td>
+						</tr>
+					</tbody>
+				</table>
+				<input type="submit" class="btn btn-primary pull-rigth" value="글쓰기">
+			</form>
+			<hr>
+			<a href="/board" class="btn btn-primary pull-rigth">전체 게시물 목록 보기</a>
+		</div>
+	</div>
 </body>
 </html>

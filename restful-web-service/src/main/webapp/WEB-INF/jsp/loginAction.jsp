@@ -1,13 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.example.demo.user.User"%>
 <%@ page import="com.example.demo.user.UserDaoService"%>
 <%@ page import="java.io.PrintWriter"%>
 <%
 request.setCharacterEncoding("UTF-8");
 %>
-<jsp:useBean id="user" class="com.example.demo.user.User" scope="page" />
-<jsp:setProperty name="user" property="name" />
-<jsp:setProperty name="user" property="password" />
+<%
+// 사용자 입력 정보 추출
+String name = request.getParameter("name");
+String password = request.getParameter("password");
+
+// 2. UserDO 클래스 객체 생성 후 맴버변수에 값 초기화
+User userDO = new User();
+userDO.setName(name);
+userDO.setPassword(password);
+
+// 3. UserDO 클래스 객체 생성 후 getUser() 메소드 호출하면서 userDO 객체를 넘겨준다
+UserDaoService userDAO = new UserDaoService();
+User user = userDAO.getUser(userDO);
+
+// 화면 네비게이션
+if (user != null) {
+	session.setAttribute("NameKey", name);
+	response.sendRedirect("/board");
+	/* out.println("<script>alert('로그인 성공');</script>"); */
+} else {
+	/* out.println("<script>alert('로그인 실패');</script>"); */
+	response.sendRedirect("/login");
+}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,32 +37,6 @@ request.setCharacterEncoding("UTF-8");
 <title>RESTful Service</title>
 </head>
 <body>
-	<%
-	UserDaoService userDAO = new UserDaoService();
-	int result = userDAO.login(user.getUserId(), user.getPassword());
-	if (result == 1) {
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("location.href = '/main'");
-		script.println("</script>");
-	} else if (result == 0) {
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('비밀먼호가 틀림')");
-		script.println("history.back()");
-		script.println("</script>");
-	} else if (result == -1) {
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("history.back()");
-		script.println("</script>");
-	} else if (result == -2) {
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('데이터베이스 오류가 발생했습니다.')");
-		script.println("history.back()");
-		script.println("</script>");
-	}
-	%>
+
 </body>
 </html>

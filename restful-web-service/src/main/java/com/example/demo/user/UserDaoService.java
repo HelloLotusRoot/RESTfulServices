@@ -1,5 +1,8 @@
 package com.example.demo.user;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -64,20 +67,38 @@ public class UserDaoService {
 		}
 		return null;
 	}
-	
-	public int login(String name, String password) {
+
+	private Connection conn = null;
+	private PreparedStatement pstmt = null;
+	private ResultSet rs = null;
+
+	// SQL 명령어
+	private final String USER_GET = "select name, password from users where naem=? and password=?";
+
+	public User getUser(User userObj) {
+		User user = null;
+
 		try {
-			for (User user : users) {
-				if (user.getName() == name)
-					if (user.getPassword() == password)
-						return 1; //로그인 성공
-					else
-						return 0; //비밀번호 불일치
-				return -1; // 아이디가 없음
+			System.out.println("===> JDBC로 getUser() 기능 처리됨 ! ");
+
+			conn = JDBCUtil.getConnection();
+			pstmt = conn.prepareStatement(USER_GET);
+			pstmt.setString(1, userObj.getName());
+			pstmt.setString(2, userObj.getPassword());
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				user = new User();
+				user.setName(rs.getString("NAME"));
+				user.setPassword(rs.getString("PASSWORD"));
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, pstmt, conn);
 		}
-		return -2; //데이터베이스 오류
+		return user;
 	}
 }
