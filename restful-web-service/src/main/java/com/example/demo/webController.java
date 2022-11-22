@@ -1,9 +1,14 @@
 package com.example.demo;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+
+import com.example.demo.user.Board;
+import com.example.demo.user.User;
 
 @Controller
 public class webController {
@@ -18,8 +23,18 @@ public class webController {
 		return "board";
 	}
 	
+	@PostMapping(value = "/board")
+	public String postBorad() {
+		return "board";
+	}
+	
 	@GetMapping(value = "/deletePostAction")
 	public String deletePostAction() {
+		return "deletePostAction";
+	}
+	
+	@DeleteMapping(value = "/deletePostAction")
+	public String deleteDeletePostAction() {
 		return "deletePostAction";
 	}
 	
@@ -28,8 +43,18 @@ public class webController {
 		return "insertPost";
 	}
 	
+	@PostMapping(value = "/insertPost")
+	public String postInsertPost() {
+		return "insertPost";
+	}
+	
 	@GetMapping(value = "/insertPostAction")
 	public String insertPostAction() {
+		return "insertPostAction";
+	}
+	
+	@PostMapping(value = "/insertPostAction")
+	public String postInsertPostAction(Board board) {
 		return "insertPostAction";
 	}
 	
@@ -43,6 +68,11 @@ public class webController {
 		return "joinAction";
 	}
 	
+	@PostMapping(value = "/joinAction")
+	public String postJoinAction(User user) {
+		return "joinAction";
+	}
+	
 	@GetMapping(value = "/login")
 	public String login() {
 		return "login";
@@ -50,6 +80,11 @@ public class webController {
 	
 	@GetMapping(value = "/loginAction")
 	public String loginAction() {
+		return "loginAction";
+	}
+	
+	@PostMapping(value = "/loginAction")
+	public String postLoginAction() {
 		return "loginAction";
 	}
 	
@@ -63,13 +98,29 @@ public class webController {
 		return "main";
 	}
 	
-	@GetMapping(value = "/post/{boardId}")
-	public String post(@PathVariable int boardId) {
+	@GetMapping(value = "/post/{board_Id}")
+	public String post(int boardId, Board board) {
 		return "post";
 	}
 	
+	@PostMapping(value = "/post/{board_Id}")
+	public String postPost(@PathVariable int boardId, Board board) {
+		return "post";
+	}
+
+	
 	@GetMapping(value = "/updatePostAction")
 	public String updatePostAction() {
+		return "updatePostAction";
+	}
+	
+	@PostMapping(value = "/updatePostAction")
+	public String postUpdatePostAction() {
+		return "updatePostAction";
+	}
+	
+	@PutMapping(value = "/updatePostAction")
+	public String putUpdatePostAction() {
 		return "updatePostAction";
 	}
 	

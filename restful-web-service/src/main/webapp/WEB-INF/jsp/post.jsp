@@ -4,9 +4,9 @@
 <%@ page import="com.example.demo.user.BoardDaoService"%>
 
 <%
-   String boardId = request.getParameter("boardId");
+   String board_Id = request.getParameter("board_Id");
    Board boardDO = new Board();
-   boardDO.setBoardId(Integer.parseInt(boardId)); //문자열로 넘어온 값을 정수값으로 변환
+   boardDO.setBoardId(Integer.parseInt(board_Id)); //문자열로 넘어온 값을 정수값으로 변환
    BoardDaoService boardDAO = new BoardDaoService();
    Board board = boardDAO.getBoard(boardDO); // 중요
    
@@ -64,7 +64,7 @@
 <div class="container">
 	<div class="row">
 		<form method="POST" action="/updatePostAction">
-			<input type="hidden" name="boardId" value="${boards.boardId}" />
+			<input type="hidden" name="boardId" value="${boards.board_Id}" />
 			<table class="table table-striped"
 				style="text-align: center; border: 1px solid #dddddd">
 				<thead>
@@ -97,7 +97,7 @@
 		</form>
 		<hr>
 		<a href="/insertPost" class="btn btn-primary pull-rigth">새 게시글 등록</a>
-		<a href="/deleteBoard?boardId=${boards.boardId}"
+		<a href="/deleteBoard?boardId=${boards.board_Id}"
 			class="btn btn-primary pull-rigth">게시글 삭제</a> <a href="/board"
 			class="btn btn-primary pull-rigth">전체 게시물 목록 보기</a>
 	</div>

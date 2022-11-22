@@ -22,11 +22,11 @@ User user = userDAO.getUser(userDO);
 
 // 화면 네비게이션
 if (user != null) {
-	session.setAttribute("NameKey", name);
+	session.setAttribute("name", user.getName());
 	response.sendRedirect("/board");
 	/* out.println("<script>alert('로그인 성공');</script>"); */
 } else {
-	/* out.println("<script>alert('로그인 실패');</script>"); */
+	out.println("<script>alert('로그인 실패');</script>");
 	response.sendRedirect("/login");
 }
 %>

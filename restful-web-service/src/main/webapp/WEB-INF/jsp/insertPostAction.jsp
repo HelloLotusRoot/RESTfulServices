@@ -3,6 +3,7 @@
 <%@ page import="com.example.demo.user.Board" %>
 <%@ page import="com.example.demo.user.BoardDaoService" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Date" %>
 
 <%
 	request.setCharacterEncoding("UTF-8");

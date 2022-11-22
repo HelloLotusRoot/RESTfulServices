@@ -73,7 +73,7 @@ public class UserDaoService {
 	private ResultSet rs = null;
 
 	// SQL 명령어
-	private final String USER_GET = "select name, password from users where naem=? and password=?";
+	private final String USER_GET = "select name, password from users where name=? and password=?";
 
 	public User getUser(User userObj) {
 		User user = null;

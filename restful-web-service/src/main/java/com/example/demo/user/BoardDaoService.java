@@ -139,11 +139,10 @@ public class BoardDaoService {
 		try {
 			conn = JDBCUtil.getConnection();
 
-			String BOARD_UPDATE = "update boards set BOARD_TITLE=?, WRITER=?, BOARD_CONTENT=? where BOARD_Id=?";
+			String BOARD_UPDATE = "update boards set BOARD_TITLE=?, BOARD_CONTENT=? where BOARD_Id=?";
 
 			pstmt = conn.prepareStatement(BOARD_UPDATE);
 			pstmt.setString(1, boardDO.getBoardTitle());
-			pstmt.setString(2, boardDO.getWriter());
 			pstmt.setString(3, boardDO.getBoardContent());
 			pstmt.setInt(4, boardDO.getBoardId());
 
@@ -186,15 +185,13 @@ public class BoardDaoService {
 		try {
 			conn = JDBCUtil.getConnection();
 
-			String BOARD_INSERT = "insert into boards(BOARD_Id, BOARD_TITLE, WRITER, BOARD_CONTENT) values((select nvl(max(boardId),0)+1 from boards),?,?,?)";
+			String BOARD_INSERT = "insert into boards(BOARD_Id, BOARD_TITLE, WRITER, BOARD_CONTENT) values((select nvl(max(board_Id),0)+1 from boards),?,?,?)";
 			// 게시글이 없어도 boardId 는 1부터 시작해서 1씩 증가
 
 			pstmt = conn.prepareStatement(BOARD_INSERT);
 			pstmt.setString(1, boardDO.getBoardTitle());
 			pstmt.setString(2, boardDO.getWriter());
 			pstmt.setString(3, boardDO.getBoardContent());
-//		         pstmt.setUser(3, boardDO.getUser());
-
 			pstmt.executeUpdate();
 
 		} catch (Exception e) {
