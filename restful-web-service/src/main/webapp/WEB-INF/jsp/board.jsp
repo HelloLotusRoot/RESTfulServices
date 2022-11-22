@@ -114,8 +114,18 @@ request.setAttribute("totalList", boardList.size());
 			}
 			%>
 		</table>
-		<a href="/insertPost" class="btn btn-primary pull-rigth">새 게시글 등록</a>
+		<%
+		if (name == null) {
+		%>
 		<a href="/board" class="btn btn-primary pull-rigth">전체 게시물 목록 보기</a>
+		<%
+		} else {
+		%>
+		<a href="/board" class="btn btn-primary pull-rigth">전체 게시물 목록 보기</a> <a
+			href="/insertPost" class="btn btn-primary pull-rigth">새 게시글 등록</a>
+		<%
+		}
+		%>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script type="application/js" src="/js/bootstrap.min.js"></script>
