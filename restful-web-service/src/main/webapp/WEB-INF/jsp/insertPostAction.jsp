@@ -9,7 +9,7 @@
 	request.setCharacterEncoding("UTF-8");
 	String writer = request.getParameter("writer");
 	String title = request.getParameter("boardTitle");
-	String content = request.getParameter("boartContent");
+	String content = request.getParameter("boardContent");
 	
 	Board boardDO = new Board();
 	boardDO.setWriter(writer);

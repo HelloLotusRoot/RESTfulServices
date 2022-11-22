@@ -9,13 +9,13 @@
 <%
 request.setCharacterEncoding("UTF-8");
 String boardId = request.getParameter("boardId");
-String boarTitle = request.getParameter("boardTitle");
-String boarContent = request.getParameter("boardContent");
+String boardTitle = request.getParameter("boardTitle");
+String boardContent = request.getParameter("boardContent");
 
 Board boardDO = new Board();
 boardDO.setBoardId(Integer.parseInt(boardId));
-boardDO.setBoardTitle(boarTitle);
-boardDO.setBoardContent(boarContent);
+boardDO.setBoardTitle(boardTitle);
+boardDO.setBoardContent(boardContent);
 
 BoardDaoService boardDAO = new BoardDaoService();
 boardDAO.updateBoard(boardDO);
@@ -26,7 +26,7 @@ response.sendRedirect("/board");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>updateBoard_proc.jsp =? "수정" 컨트롤러 페이지</title>
+<title>"수정" 컨트롤러 페이지</title>
 </head>
 <body>
 

@@ -101,4 +101,26 @@ public class UserDaoService {
 		}
 		return user;
 	}
+
+	public void insertUser(User userObj) {
+		System.out.println("==> insertUser() 처리됨!");
+
+		try {
+			conn = JDBCUtil.getConnection();
+
+			String USER_INSERT = "insert into users(USER_ID, NAME, PASSWORD, SSN, JOIN_DATE) values((select nvl(max(USER_ID),0)+1 from users),?,?,?,NOW())";
+
+			pstmt = conn.prepareStatement(USER_INSERT);
+			pstmt.setString(1, userObj.getName());
+			pstmt.setString(2, userObj.getPassword());
+			pstmt.setString(3, userObj.getSsn());
+			pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		} finally {
+			JDBCUtil.close(pstmt, conn);
+		}
+	}
 }

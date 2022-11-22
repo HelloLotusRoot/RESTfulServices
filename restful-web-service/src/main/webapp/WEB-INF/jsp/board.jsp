@@ -18,11 +18,6 @@
 
 <title>RESTful Service</title>
 <style>
-#div_box {
-	position: absolutel;
-	top: 10%;
-	left: 20%;
-}
 </style>
 </head>
 <%
@@ -110,8 +105,7 @@ request.setAttribute("totalList", boardList.size());
 			%>
 			<tr>
 				<td align="center"><%=boards.getBoardId()%></td>
-				<td align="left"><a
-					href="/post/{boardId}<%=boards.getBoardId()%>"><%=boards.getBoardTitle()%></a></td>
+				<td align="left"><a href="/post/<%=boards.getBoardId()%>"><%=boards.getBoardTitle()%></a></td>
 				<!-- 제목으로 갈 때 게시글 번호를 같이 넘겨줘라. -->
 				<td align="center"><%=boards.getWriter()%></td>
 				<td align="center"><%=boards.getBoardDate()%></td>

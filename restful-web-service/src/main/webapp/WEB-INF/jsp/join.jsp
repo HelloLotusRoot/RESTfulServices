@@ -16,10 +16,6 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 <title>RESTful Service</title>
 </head>
-<%
-Board posts = new Board();
-//List<Post> list = posts.findAll();
-%>
 <body>
 	<nav class="navbar navbar-default">
 		<div class="navbar-header">
@@ -52,19 +48,19 @@ Board posts = new Board();
 		<div class="col-lg-4"></div>
 		<div class="col-lg-4">
 			<div class="jumbotron" style="padding-top: 20px;">
-				<form method="post" action="/joinAction">
+				<form method="POST" action="/joinAction">
 					<h3 style="text-align: center;">회원가입 화면</h3>
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="아이디"
-							name="userID" maxlength="20">
+							name="name" maxlength="20">
 					</div>
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="비밀번호"
-							name="userPassword" maxlength="20">
+							name="password" maxlength="20">
 					</div>
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="학번"
-							name="userPassword" maxlength="20">
+							name="ssn" maxlength="20">
 					</div>
 					<input type="submit" class="btn btn-primary form-control"
 						value="회원가입">

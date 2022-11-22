@@ -4,13 +4,27 @@
 <%@ page import="com.example.demo.user.BoardDaoService"%>
 
 <%
-   String board_Id = request.getParameter("board_Id");
-   Board boardDO = new Board();
-   boardDO.setBoardId(Integer.parseInt(board_Id)); //문자열로 넘어온 값을 정수값으로 변환
-   BoardDaoService boardDAO = new BoardDaoService();
-   Board board = boardDAO.getBoard(boardDO); // 중요
-   
-   request.setAttribute("board", board);
+int boardId = 0;
+if (request.getParameter("boardId") != null) {
+	boardId = Integer.parseInt(request.getParameter("boardId"));
+}
+Board boardDO = new Board();
+//   boardDO.setBoardId(Integer.parseInt(boardId)); //문자열로 넘어온 값을 정수값으로 변환
+BoardDaoService boardDAO = new BoardDaoService();
+Board board = boardDAO.getBoard(boardDO); // 중요
+
+request.setAttribute("boards", board);
+%>
+
+<%/*
+String boardId = request.getParameter("boardId");
+Board boardDO = new Board();
+boardDO.setBoardId(Integer.parseInt(boardId)); //문자열로 넘어온 값을 정수값으로 변환
+
+BoardDaoService boardDAO = new BoardDaoService();
+Board board = boardDAO.getBoard(boardDO); // 중요
+
+request.setAttribute("boards", board);*/
 %>
 <!DOCTYPE html>
 <html>
@@ -26,6 +40,12 @@
 <style>
 </style>
 </head>
+<%
+String name = null;
+if (session.getAttribute("name") != null) {
+	name = (String) session.getAttribute("name");
+}
+%>
 <nav class="navbar navbar-default">
 	<div class="navbar-header">
 		<button type="button" class="navbar-toggle collapsed"
@@ -42,6 +62,9 @@
 			<li><a href="/main">메인</a></li>
 			<li class="active"><a href="/board">게시판</a></li>
 		</ul>
+		<%
+		if (name == null) {
+		%>
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
 				data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -51,6 +74,9 @@
 					<li><a href="/join">회원가입</a></li>
 				</ul></li>
 		</ul>
+		<%
+		} else {
+		%>
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
 				data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -59,6 +85,10 @@
 					<li><a href="/logoutAction">로그아웃</a></li>
 				</ul></li>
 		</ul>
+		<%
+		}
+		%>
+
 	</div>
 </nav>
 <div class="container">
@@ -97,7 +127,7 @@
 		</form>
 		<hr>
 		<a href="/insertPost" class="btn btn-primary pull-rigth">새 게시글 등록</a>
-		<a href="/deleteBoard?boardId=${boards.board_Id}"
+		<a href="/post/{boardId}=${boards.board_Id}"
 			class="btn btn-primary pull-rigth">게시글 삭제</a> <a href="/board"
 			class="btn btn-primary pull-rigth">전체 게시물 목록 보기</a>
 	</div>

@@ -106,7 +106,7 @@ public class BoardDaoService {
 			conn = JDBCUtil.getConnection();
 
 			// 그런 다음 해당 게시글 가져오기
-			String BOARD_GET = "select * from boards where BOARD_Id=?";
+			String BOARD_GET = "select * from boards where board_Id=?";
 			pstmt = conn.prepareStatement(BOARD_GET);
 			pstmt.setInt(1, boardDO.getBoardId());
 			rs = pstmt.executeQuery();
@@ -181,11 +181,10 @@ public class BoardDaoService {
 	public void insertBoard(Board boardDO) {
 		System.out.println("==> insertBoard() 처리됨!");
 
-		int result = 0;
 		try {
 			conn = JDBCUtil.getConnection();
 
-			String BOARD_INSERT = "insert into boards(BOARD_Id, BOARD_TITLE, WRITER, BOARD_CONTENT) values((select nvl(max(board_Id),0)+1 from boards),?,?,?)";
+			String BOARD_INSERT = "insert into boards(BOARD_Id, BOARD_TITLE, WRITER, BOARD_CONTENT, BOARD_DATE) values((select nvl(max(board_Id),0)+1 from boards),?,?,?,NOW())";
 			// 게시글이 없어도 boardId 는 1부터 시작해서 1씩 증가
 
 			pstmt = conn.prepareStatement(BOARD_INSERT);

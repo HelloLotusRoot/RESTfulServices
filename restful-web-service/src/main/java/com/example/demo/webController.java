@@ -98,17 +98,16 @@ public class webController {
 		return "main";
 	}
 	
-	@GetMapping(value = "/post/{board_Id}")
-	public String post(int boardId, Board board) {
+	@GetMapping(value = "/post/{boardId}")
+	public String post() {
 		return "post";
 	}
 	
-	@PostMapping(value = "/post/{board_Id}")
-	public String postPost(@PathVariable int boardId, Board board) {
+	@PostMapping(value = "/post/{boardId}")
+	public String postPost() {
 		return "post";
 	}
 
-	
 	@GetMapping(value = "/updatePostAction")
 	public String updatePostAction() {
 		return "updatePostAction";
