@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(description = "게시판 도메인 객체")
 @Table(name = "boards")
@@ -27,7 +27,7 @@ public class Board {
 
 	@Id
 	@GeneratedValue
-	private Integer boardId;
+	private int boardId;
 
 	// User : Board -> 1 : (0~N), Main : Sub -> Parent : Child
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -44,6 +44,7 @@ public class Board {
 	private Date boardDate;
 
 	public Board(int boardId, User user, String writer, String boardTitle, String boardContent, Date boardDate) {
+		super();
 		this.boardId = boardId;
 		this.user = user;
 		this.writer = writer;
@@ -51,5 +52,7 @@ public class Board {
 		this.boardContent = boardContent;
 		this.boardDate = boardDate;
 	}
+
+	
 
 }

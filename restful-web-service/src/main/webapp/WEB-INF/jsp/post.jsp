@@ -1,22 +1,30 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.io.PrintWriter"%>
 <%@ page import="com.example.demo.user.Board"%>
 <%@ page import="com.example.demo.user.BoardDaoService"%>
 
-<%
+<% /*
 int boardId = 0;
 if (request.getParameter("boardId") != null) {
 	boardId = Integer.parseInt(request.getParameter("boardId"));
 }
+
 Board boardDO = new Board();
-//   boardDO.setBoardId(Integer.parseInt(boardId)); //문자열로 넘어온 값을 정수값으로 변환
 BoardDaoService boardDAO = new BoardDaoService();
 Board board = boardDAO.getBoard(boardDO); // 중요
 
 request.setAttribute("boards", board);
+
+//if (boardId == 0) {
+//	PrintWriter script = response.getWriter();
+//	script.println("<srtipt>");
+//	script.println("alert('유효하지 않은 글입니다.')");
+//	script.println("</srtipt>");
+//}*/
 %>
 
-<%/*
+<%
 String boardId = request.getParameter("boardId");
 Board boardDO = new Board();
 boardDO.setBoardId(Integer.parseInt(boardId)); //문자열로 넘어온 값을 정수값으로 변환
@@ -24,7 +32,7 @@ boardDO.setBoardId(Integer.parseInt(boardId)); //문자열로 넘어온 값을 �
 BoardDaoService boardDAO = new BoardDaoService();
 Board board = boardDAO.getBoard(boardDO); // 중요
 
-request.setAttribute("boards", board);*/
+request.setAttribute("boards", board);
 %>
 <!DOCTYPE html>
 <html>

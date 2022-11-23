@@ -26,14 +26,14 @@ public class BoardDaoService {
 		return boards;
 	}
 
-	public Board save(Board board) {
+/*	public Board save(Board board) {
 		if (board.getBoardId() == null) {
 			board.setBoardId(++boardsCount);
 		}
 
 		boards.add(board);
 		return board;
-	}
+	}*/
 
 	public Board deleteById(int boardId) {
 		Iterator<Board> iterator = boards.iterator();
@@ -70,10 +70,10 @@ public class BoardDaoService {
 				where = "where " + searchField + " like '%" + searchText + "%'";
 			}
 
-			System.out.println("where: " + where);
+			//System.out.println("where: " + where);
 
-			String Condition_SQL = "select * from boards " + where + " order by board_Id desc";
-
+			String Condition_SQL = "select * from boards" + where + " order by board_Id desc";
+			
 			pstmt = conn.prepareStatement(Condition_SQL);
 			rs = pstmt.executeQuery();
 
@@ -98,7 +98,7 @@ public class BoardDaoService {
 	}
 
 	public Board getBoard(Board boardDO) {
-		System.out.println("==> getBoard() 처리됨");
+		System.out.println(boardDO);
 
 		Board board = null;
 

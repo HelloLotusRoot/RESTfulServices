@@ -4,5 +4,5 @@ insert into users values(90003, NOW(), 'User3', 'test3333', '901010-3333333');
 
 insert into boards values(10001, 'hello first', NOW(), 'My first post', 'kang', 90001);
 insert into boards values(10002, 'hello second', NOW(), 'My second post', 'park', 90001);
-insert into boards values(10003, '안녕하세', NOW(), 'My first post', 'kim', 90003);
+insert into boards values(10003, '안녕하세요', NOW(), 'My first post', 'kim', 90003);
 insert into boards values(10004, '반갑습니다', NOW(), 'My second post', 'lee', 90003);

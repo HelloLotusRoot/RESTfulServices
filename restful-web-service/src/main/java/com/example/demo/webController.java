@@ -24,7 +24,7 @@ public class webController {
 	}
 	
 	@PostMapping(value = "/board")
-	public String postBorad() {
+	public String postBorad(String boardId) {
 		return "board";
 	}
 	
@@ -44,12 +44,12 @@ public class webController {
 	}
 	
 	@PostMapping(value = "/insertPost")
-	public String postInsertPost() {
+	public String postInsertPost(Board board) {
 		return "insertPost";
 	}
 	
 	@GetMapping(value = "/insertPostAction")
-	public String insertPostAction() {
+	public String insertPostAction(Board board) {
 		return "insertPostAction";
 	}
 	
@@ -99,12 +99,12 @@ public class webController {
 	}
 	
 	@GetMapping(value = "/post/{boardId}")
-	public String post() {
+	public String post(int boardId, Board board) {
 		return "post";
 	}
 	
 	@PostMapping(value = "/post/{boardId}")
-	public String postPost() {
+	public String postPost(int boardId, Board board) {
 		return "post";
 	}
 

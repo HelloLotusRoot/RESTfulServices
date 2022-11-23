@@ -18,6 +18,9 @@
 
 <title>RESTful Service</title>
 <style>
+.hidden {
+	display: none;
+}
 </style>
 </head>
 <%
@@ -105,11 +108,33 @@ request.setAttribute("totalList", boardList.size());
 			%>
 			<tr>
 				<td align="center"><%=boards.getBoardId()%></td>
-				<td align="left"><a href="/post/<%=boards.getBoardId()%>"><%=boards.getBoardTitle()%></a></td>
-				<!-- 제목으로 갈 때 게시글 번호를 같이 넘겨줘라. -->
+				<!--<td align="left"><a href="/post/<%= boards.getBoardId()%>"><%=boards.getBoardTitle() %></a></td>-->
+				<td align="left"><a><%=boards.getBoardTitle() %></a></td>
+				<!-- 제목으로 갈 때 게시글 번호를 같이 넘겨줘라.<a href="/post/<%=boards.getBoardId()%>"><%=boards.getBoardTitle()%></a></td> -->
 				<td align="center"><%=boards.getWriter()%></td>
 				<td align="center"><%=boards.getBoardDate()%></td>
 			</tr>
+			<tr>
+				<th style="background-color: #eeeeee; text-align: center;">글 내용</th>
+				<td colspan="3"><%=boards.getBoardContent()%></td>
+			</tr>
+			<%
+			String act = request.getParameter("act");
+			if ( act != null ) {
+			%>
+			<tr>
+				<th style="background-color: #eeeeee; text-align: center;">글 내용</th>
+				<td colspan="3"><%=boards.getBoardContent()%></td>
+			</tr>
+			<%
+			} else {
+			%><tr>
+				<td class="hidden" style="text-align: center;">글 내용</td>
+				<td class="hidden" colspan="3"><%=boards.getBoardContent()%></td>
+			</tr>
+			<%
+			} 
+			%>
 			<%
 			}
 			%>
